@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Input from "./component/Shared/Input";
 import Card from "./component/Shared/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import WideButton from "./component/Shared/WideButton";
 
@@ -14,6 +14,14 @@ function Login() {
   const [validation, setValidation] = useState([]);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/home", {
+        replace: true,
+      });
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
