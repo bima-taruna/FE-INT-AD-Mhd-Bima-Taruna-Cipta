@@ -23,3 +23,5 @@
    ```bash
      npm run dev
     ```
+- projek akan berjalan pada alamat berikut
+  http://localhost:5173/
