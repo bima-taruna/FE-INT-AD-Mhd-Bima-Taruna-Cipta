@@ -1,9 +1,53 @@
+import { useState } from "react";
 import Card from "./component/Shared/Card";
 import Input from "./component/Shared/Input";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 function Register() {
-  const handleSubmit = (e) => {};
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+  });
 
-  const handleChange = (e) => {};
+  const [validation, setValidation] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("password", formData.password);
+    formDataToSend.append(
+      "password_confirmation",
+      formData.password_confirmation
+    );
+
+    for (let [key, value] of formDataToSend.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    await axios
+      .post(`${import.meta.env.VITE_API_URL}/register`, formDataToSend)
+      .then(() => {
+        navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        setValidation(error.response.data);
+      });
+  };
+
+  const handleChange = (e) => {
+    console.log(formData);
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -25,6 +69,7 @@ function Register() {
               placeholder={"masukkan nama anda"}
               isRequired={true}
               onChange={handleChange}
+              validationData={validation.name}
             />
             <Input
               name={"email"}
@@ -32,6 +77,7 @@ function Register() {
               placeholder={"name@email.com"}
               isRequired={true}
               onChange={handleChange}
+              validationData={validation.email}
             />
             <Input
               name={"password"}
@@ -39,14 +85,22 @@ function Register() {
               placeholder={"••••••••"}
               isRequired={true}
               onChange={handleChange}
+              validationData={validation.password}
             />
+            <Input
+              name={"password_confirmation"}
+              type={"password"}
+              placeholder={"konfirmasi password anda"}
+              isRequired={true}
+              onChange={handleChange}
+            />
+            <button
+              type="submit"
+              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Register
+            </button>
           </form>
-          <button
-            type="submit"
-            className="w-full text-white font-bold bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Register
-          </button>
         </Card>
       </div>
     </section>
