@@ -26,10 +26,6 @@ function Register() {
       formData.password_confirmation
     );
 
-    for (let [key, value] of formDataToSend.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
     await axios
       .post(`${import.meta.env.VITE_API_URL}/register`, formDataToSend)
       .then(() => {
@@ -41,7 +37,6 @@ function Register() {
   };
 
   const handleChange = (e) => {
-    console.log(formData);
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
