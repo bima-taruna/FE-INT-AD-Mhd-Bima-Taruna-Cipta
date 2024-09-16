@@ -1,11 +1,43 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "./component/Shared/Input";
 import Card from "./component/Shared/Card";
+import { useState } from "react";
+import axios from "axios";
 
 function Login() {
-  const handleSubmit = (e) => {};
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
 
-  const handleChange = (e) => {};
+  const [validation, setValidation] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formDataToSend = new FormData();
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("password", formData.password);
+
+    await axios
+      .post(`${import.meta.env.VITE_API_URL}/login`, formDataToSend)
+      .then((response) => {
+        localStorage.setItem("token", response.data.token);
+        navigate("/home", { replace: true });
+      })
+      .catch((error) => {
+        setValidation(error.response.data);
+      });
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -26,6 +58,7 @@ function Login() {
               placeholder={"name@email.com"}
               isRequired={true}
               onChange={handleChange}
+              validationData={validation.email}
             />
             <Input
               name={"password"}
@@ -33,23 +66,22 @@ function Login() {
               placeholder={"••••••••"}
               isRequired={true}
               onChange={handleChange}
+              validationData={validation.password}
             />
+            <button
+              type="submit"
+              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Login
+            </button>
           </form>
-          <button
-            type="submit"
-            className="w-full text-white font-bold bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Login
-          </button>
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
             Belum punya akun? Silahkan
-            <Link to="/register">
-              <a
-                href="#"
-                className="font-medium text-blue-600 hover:underline dark:text-blue-500 mx-2"
-              >
-                Registrasi
-              </a>
+            <Link
+              className="font-medium text-blue-600 hover:underline dark:text-blue-500 mx-2"
+              to="/register"
+            >
+              Registrasi
             </Link>
             Terlebih dahulu
           </p>
