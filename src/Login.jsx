@@ -3,6 +3,7 @@ import Input from "./component/Shared/Input";
 import Card from "./component/Shared/Card";
 import { useState } from "react";
 import axios from "axios";
+import WideButton from "./component/Shared/WideButton";
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -68,12 +69,7 @@ function Login() {
               onChange={handleChange}
               validationData={validation.password}
             />
-            <button
-              type="submit"
-              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Login
-            </button>
+            <WideButton text={"Login"} type={"submit"} />
           </form>
           <p className="text-sm font-light text-gray-500 dark:text-gray-400">
             Belum punya akun? Silahkan

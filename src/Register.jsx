@@ -3,6 +3,7 @@ import Card from "./component/Shared/Card";
 import Input from "./component/Shared/Input";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import WideButton from "./component/Shared/WideButton";
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -89,12 +90,7 @@ function Register() {
               isRequired={true}
               onChange={handleChange}
             />
-            <button
-              type="submit"
-              className="w-full text-white font-bold bg-blue-400 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300  rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Register
-            </button>
+            <WideButton type={"submit"} text={"Register"} />
           </form>
         </Card>
       </div>
