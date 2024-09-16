@@ -1,4 +1,11 @@
-function Input({ name, type, placeholder, isRequired, onChange }) {
+function Input({
+  name,
+  type,
+  placeholder,
+  isRequired,
+  onChange,
+  validationData,
+}) {
   return (
     <div>
       <label
@@ -16,6 +23,9 @@ function Input({ name, type, placeholder, isRequired, onChange }) {
         required={isRequired}
         onChange={onChange}
       />
+      {validationData && (
+        <div className="mx-4 text-red-500">{validationData[0]}</div>
+      )}
     </div>
   );
 }
