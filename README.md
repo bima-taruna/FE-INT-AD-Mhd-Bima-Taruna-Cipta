@@ -1,8 +1,9 @@
 <h1>Simple To Do Frontend</h1>
 
 # Requirement 
--Node.js (version 14 or later)
--npm (comes with Node.js) or yarn
+-Node.js (versi ^14)
+
+-npm  atau yarn
 
 # Instalasi
 - clone repository ini
