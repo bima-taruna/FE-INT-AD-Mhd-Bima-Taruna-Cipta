@@ -1,8 +1,24 @@
-# React + Vite
+<h1>Simple To Do Frontend</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Requirement 
+-Node.js (version 14 or later)
+-npm (comes with Node.js) or yarn
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Instalasi
+- clone repository ini
+  ```bash
+  git clone https://github.com/bima-taruna/BE-INT-AD-Mhd-Bima-Taruna-Cipta.git
+  cd BE-INT-AD-Mhd-Bima-Taruna-Cipta
+    ```
+- Install Dependencies dengan npm
+  ```bash
+     npm install
+    ```
+- buka project lalu buat file .env dan masukkan variabel:
+  ```bash
+    VITE_API_URL = http://127.0.0.1:8000/api/v1
+  ```
+- Jalankan server development
+   ```bash
+     npm run dev
+    ```
