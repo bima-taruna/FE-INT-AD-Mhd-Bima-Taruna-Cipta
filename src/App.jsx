@@ -1,10 +1,11 @@
 import NavBar from "./component/Navbar";
+import TaskList from "./component/TaskList";
 
 function App() {
   return (
     <>
       <NavBar />
-      <div className="text-3xl font-bold underline">heloooo</div>
+      <TaskList />
     </>
   );
 }
